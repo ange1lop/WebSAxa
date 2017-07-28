@@ -26,7 +26,8 @@ factura.selectByClient = function(idCliente, callback){
 
 factura.selectByServicio = function(idServicio, callback){
   if(database){
-    database.query("SELECT * FROM factura WHERE idServicio = ?",idServicio,function(error,resultados){
+    var sql = "SELECT * FROM f.idFactura,f.total,f.idEmpresa,u.nombre, u.idUsuario, f.idServicio FROM Factura f INNER JOIN Usuario u ON u.idUsuario = f.idUsuario WHERE idServicio = ?"
+    database.query(sql,idServicio,function(error,resultados){
       if(error){
         throw error;
       }else {
